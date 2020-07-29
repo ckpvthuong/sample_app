@@ -30,4 +30,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  user: 'Users'
+  name: 'Name'
+  email: 'Email'
+  show: 'Show'
+  edit: 'Edit'
+  destroy: 'Destroy'
+  new_user: 'New User'
+  date: 'Create date'
