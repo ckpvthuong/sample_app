@@ -1,25 +1,39 @@
-# This is rubocop configuration file for Framgia"s coding style. Enabling and disabling is configured
+# This is rubocop configuration file for Framgia's coding style. Enabling and disabling is configured
 # in separate files. This file adds all other parameters apart from Enabled.
 
 # Put the following files into the same directory as this file.
-# frozen_string_literal: true
 inherit_from:
   - .rubocop_enabled.yml
   - .rubocop_disabled.yml
 
+#AllCops:
+#  # Include gemspec and Rakefile
+#  Include:
+#    - '**/*.gemspec'
+#  Exclude:
+#    - 'vendor/**/*'
+#    - 'config/unicorn.rb'
+#    - 'bin/*'
+#    - 'db/**/*'
+#    - 'spec/**/*'
+#    - 'script/rails'
+#    - 'config/**/*'
+
 # Common configuration.
 AllCops:
-  # Include gemspec and Rakefile
-  Include:
-    - "**/*.gemspec"
+  TargetRubyVersion: 2.5.1
   Exclude:
-    - "vendor/**/*"
-    - "config/unicorn.rb"
-    - "bin/*"
-    - "db/**/*"
-    - "spec/**/*"
-    - "script/rails"
-    - "config/**/*"
+    - db/schema.rb
+    - db/migrate/*
+    - bin/*
+    - vendor/**/*
+    - db/**/*
+    - spec/**/*
+    - config/**/*
+    - test/**/*
+    - Gemfile
+    - Rakefile
+    - config.ru
 
 # Indent private/protected/public as deep as method definitions
 Layout/AccessModifierIndentation:
@@ -33,14 +47,14 @@ Layout/AlignHash:
   # Alignment of entries using hash rocket as separator. Valid values are:
   #
   # key - left alignment of keys
-  #   "a" => 2
-  #   "bb" => 3
+  #   'a' => 2
+  #   'bb' => 3
   # separator - alignment of hash rockets, keys are right aligned
-  #    "a" => 2
-  #   "bb" => 3
+  #    'a' => 2
+  #   'bb' => 3
   # table - left alignment of keys, hash rockets, and values
-  #   "a"  => 2
-  #   "bb" => 3
+  #   'a'  => 2
+  #   'bb' => 3
   EnforcedHashRocketStyle: key
   # Alignment of entries using colon as separator. Valid values are:
   #
@@ -117,7 +131,7 @@ Metrics/BlockNesting:
 Metrics/AbcSize:
   # The ABC size is a calculated magnitude, so this number can be a Fixnum or
   # a Float.
-  Max: 20
+  Max: 35
 
 Style/BracesAroundHashParameters:
   EnforcedStyle: no_braces
@@ -173,11 +187,11 @@ Style/CollectionMethods:
   #   PreferredMethods:
   #     find: detect
   PreferredMethods:
-    collect: "map"
-    collect!: "map!"
-    inject: "reduce"
-    detect: "find"
-    find_all: "select"
+    collect: 'map'
+    collect!: 'map!'
+    inject: 'reduce'
+    detect: 'find'
+    find_all: 'select'
 
 # Checks formatting of special comments
 Style/CommentAnnotation:
@@ -201,7 +215,7 @@ Layout/DotPosition:
 
 # Use empty lines between defs.
 Layout/EmptyLineBetweenDefs:
-  # If true, this parameter means that single line method definitions don"t
+  # If true, this parameter means that single line method definitions don't
   # need an empty line between them.
   AllowAdjacentOneLineDefs: false
 
@@ -222,9 +236,9 @@ Layout/EmptyLinesAroundModuleBody:
 
 Naming/FileName:
   Exclude:
-    - "**/Rakefile"
-    - "**/Gemfile"
-    - "**/Capfile"
+    - '**/Rakefile'
+    - '**/Gemfile'
+    - '**/Capfile'
 
 # Checks use of for or each in multiline loops.
 Style/For:
@@ -286,7 +300,7 @@ Metrics/LineLength:
 Style/Next:
   # With `always` all conditions at the end of an iteration needs to be
   # replace by next - with `skip_modifier_ifs` the modifier if like this one
-  # are ignored: [1, 2].each { |a| return "yes" if a == 1 }
+  # are ignored: [1, 2].each { |a| return 'yes' if a == 1 }
   EnforcedStyle: skip_modifier_ifs
   SupportedStyles:
     - skip_modifier_ifs
@@ -324,21 +338,24 @@ Metrics/ParameterLists:
   Max: 5
   CountKeywordArgs: true
 
+Metrics/PerceivedComplexity:
+  Max: 10
+
 # Allow safe assignment in conditions.
 Style/ParenthesesAroundCondition:
   AllowSafeAssignment: true
 
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
-    "%":  ()
-    "%i": ()
-    "%q": ()
-    "%Q": ()
-    "%r": "{}"
-    "%s": ()
-    "%w": ()
-    "%W": ()
-    "%x": ()
+    '%':  ()
+    '%i': ()
+    '%q': ()
+    '%Q': ()
+    '%r': '{}'
+    '%s': ()
+    '%w': ()
+    '%W': ()
+    '%x': ()
 
 Naming/PredicateName:
   NamePrefixBlacklist:
@@ -385,7 +402,7 @@ Style/SingleLineMethods:
   AllowIfMethodIsEmpty: true
 
 Style/StringLiterals:
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes
   SupportedStyles:
     - single_quotes
     - double_quotes
@@ -397,18 +414,25 @@ Layout/SpaceAroundEqualsInParameterDefault:
     - no_space
 
 Layout/SpaceBeforeBlockBraces:
-  EnforcedStyle: no_space
+  EnforcedStyle: space
   SupportedStyles:
+    - space
+    - no_space
+  EnforcedStyleForEmptyBraces: space
+  SupportedStylesForEmptyBraces:
     - space
     - no_space
 
 Layout/SpaceInsideBlockBraces:
-  EnforcedStyle: no_space
+  EnforcedStyle: space
   SupportedStyles:
     - space
     - no_space
   # Valid values are: space, no_space
   EnforcedStyleForEmptyBraces: no_space
+  SupportedStylesForEmptyBraces:
+    - space
+    - no_space
   # Space between { and |. Overrides EnforcedStyle if there is a conflict.
   SpaceBeforeBlockParameters: false
 
@@ -458,12 +482,12 @@ Style/TrailingCommaInHashLiteral:
     - consistent_comma
     - no_comma
 
-# TrivialAccessors doesn"t require exact name matches and doesn"t allow
+# TrivialAccessors doesn't require exact name matches and doesn't allow
 # predicated methods by default.
 Style/TrivialAccessors:
   ExactNameMatch: false
   AllowPredicates: false
-  # Allows trivial writers that don"t end in an equal sign. e.g.
+  # Allows trivial writers that don't end in an equal sign. e.g.
   #
   # def on_exception(action)
   #   @on_exception=action
