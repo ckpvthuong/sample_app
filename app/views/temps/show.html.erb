@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @temp.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @temp.content %>
+</p>
+
+<%= link_to 'Edit', edit_temp_path(@temp) %> |
+<%= link_to 'Back', temps_path %>

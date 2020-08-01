@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
+
+  # GET /users
+  def index
+    @users = User.all
+  end
+  
+  # GET /users/new
   def new
+    @user = User.new
   end
 
   def show
@@ -7,10 +15,13 @@ class UsersController < ApplicationController
     # debugger
   end
 
+  # POST /users
+  # POST /users.json
   def create
     @user = User.new(user_params)
     if @user.save
-      # Handle a successful save.
+      flash[:success] = "Welcome to the Sample App!"
+      redirect_to @user
     else
       render 'new'  
     end
